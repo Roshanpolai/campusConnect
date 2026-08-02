@@ -1,0 +1,8 @@
+// Usage: authorize("super_admin"), authorize("job_poster", "super_admin")
+export const authorize = (...allowedRoles) => (req, res, next) => {
+  if (!req.user || !allowedRoles.includes(req.user.role)) {
+    res.status(403);
+    return next(new Error("You do not have permission to perform this action"));
+  }
+  next();
+};
