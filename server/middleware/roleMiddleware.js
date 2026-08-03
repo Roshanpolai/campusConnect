@@ -1,4 +1,3 @@
-// Usage: authorize("super_admin"), authorize("job_poster", "super_admin")
 export const authorize = (...allowedRoles) => (req, res, next) => {
   if (!req.user || !allowedRoles.includes(req.user.role)) {
     res.status(403);

@@ -4,8 +4,8 @@ import generateToken from "../utils/generateToken.js";
 import asyncHandler from "../middleware/asyncHandler.js";
 import { sendEmail, buildResetPasswordEmail } from "../utils/sendEmail.js";
 
-// desc -> Register new student
-// route -> POST /api/auth/register
+// Register new student
+// POST /api/auth/register
 export const registerUser = asyncHandler(async (req, res) => {
   const { fullName, email, studentId, department, year, section, password, confirmPassword } = req.body;
 
@@ -34,8 +34,9 @@ export const registerUser = asyncHandler(async (req, res) => {
   });
 });
 
-// @desc  Login
-// @route POST /api/auth/login
+
+// Login user and get token
+// POST /api/auth/login
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -56,8 +57,9 @@ export const loginUser = asyncHandler(async (req, res) => {
   });
 });
 
-// @desc  Request a password reset token
-// @route POST /api/auth/forgot-password
+
+// Request a password reset token
+// POST /api/auth/forgot-password
 export const forgotPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
@@ -77,10 +79,6 @@ export const forgotPassword = asyncHandler(async (req, res) => {
   const emailResult = await sendEmail({ to: user.email, subject, html, text });
 
   if (!emailResult.sent) {
-    // SMTP isn't configured (or the send failed) — don't block the flow.
-    // Log the reset link server-side and return a dev token so you can still
-    // test the flow locally. Configure SMTP_HOST/SMTP_USER/SMTP_PASS in .env
-    // to send real emails — see server/.env.example.
     console.warn(`[forgot-password] Email not sent (${emailResult.reason}). Reset URL: ${resetUrl}`);
   }
 
@@ -93,8 +91,8 @@ export const forgotPassword = asyncHandler(async (req, res) => {
   });
 });
 
-// @desc  Reset password using token
-// @route POST /api/auth/reset-password/:token
+// Reset password using token
+// POST /api/auth/reset-password/:token
 export const resetPassword = asyncHandler(async (req, res) => {
   const hashedToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
 
@@ -116,8 +114,8 @@ export const resetPassword = asyncHandler(async (req, res) => {
   res.json({ success: true, message: "Password has been reset. You can now log in." });
 });
 
-// @desc  Get logged-in user's profile
-// @route GET /api/auth/me
+// Get logged-in user's profile
+// GET /api/auth/me
 export const getMe = asyncHandler(async (req, res) => {
   res.json({ success: true, user: req.user.toSafeObject() });
 });

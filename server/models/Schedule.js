@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// Schedule schema for storing uploaded schedule files (PDF, Word, PowerPoint, ZIP) in Cloudinary
 const scheduleSchema = new mongoose.Schema(
   {
     department: { type: String, required: true },

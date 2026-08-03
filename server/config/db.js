@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// Single responsibility: open the Mongo connection and fail loudly if it can't.
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI);

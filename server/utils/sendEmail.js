@@ -20,12 +20,17 @@ function getTransporter() {
 export async function sendEmail({ to, subject, html, text }) {
   const transporter = getTransporter();
   if (!transporter) {
-    return { sent: false, reason: "SMTP not configured (SMTP_HOST/SMTP_USER/SMTP_PASS missing in .env)" };
+    return {
+      sent: false,
+      reason:
+        "SMTP not configured (SMTP_HOST/SMTP_USER/SMTP_PASS missing in .env)",
+    };
   }
 
   try {
     await transporter.sendMail({
-      from: process.env.SMTP_FROM || `"CampusConnect" <${process.env.SMTP_USER}>`,
+      from:
+        process.env.SMTP_FROM || `"CampusConnect" <${process.env.SMTP_USER}>`,
       to,
       subject,
       html,

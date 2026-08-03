@@ -3,7 +3,7 @@ export const notFound = (req, res, next) => {
   next(new Error(`Route not found - ${req.originalUrl}`));
 };
 
-// eslint-disable-next-line no-unused-vars
+// Error handler middleware
 export const errorHandler = (err, req, res, next) => {
   let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   let message = err.message;

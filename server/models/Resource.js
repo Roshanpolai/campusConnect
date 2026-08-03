@@ -10,8 +10,6 @@ const resourceSchema = new mongoose.Schema(
     year: { type: String, required: true },
     section: { type: String, default: "" },
     semester: { type: String, default: "" },
-
-    // File lives in Cloudinary (raw asset) — Mongo only stores the pointer/metadata.
     cloudinaryPublicId: { type: String, required: true },
     fileUrl: { type: String, required: true },
     fileName: { type: String, required: true },

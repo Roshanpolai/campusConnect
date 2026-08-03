@@ -5,8 +5,6 @@ import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// Wrap multer so its errors (bad type, too large) flow into the same JSON
-// error shape as everything else, instead of an unhandled exception.
 const withMulter = (middleware) => (req, res, next) => {
   middleware(req, res, (err) => {
     if (err) {

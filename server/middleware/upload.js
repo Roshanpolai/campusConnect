@@ -1,7 +1,5 @@
 import multer from "multer";
-
 const memoryStorage = multer.memoryStorage();
-
 const IMAGE_TYPES = [
   "image/jpeg",
   "image/png",
@@ -17,13 +15,11 @@ const DOCUMENT_TYPES = [
   "application/vnd.openxmlformats-officedocument.presentationml.presentation",
   "application/zip",
   "application/x-zip-compressed",
-  "image/jpeg", // scanned notes are often photographed
+  "image/jpeg",
   "image/png",
 ];
 
-// Images only — used for profile photos, event banners, gallery, product/listing
-// photos. Explicitly excludes video and everything else (Cloudinary handles images
-// only in this app, per product requirements).
+// Images — used for profile pictures, post images, etc.
 export const uploadImage = multer({
   storage: memoryStorage,
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
@@ -40,7 +36,6 @@ export const uploadImage = multer({
 }).single("image");
 
 // Documents — used for notes, PYQs, resumes, certificates, zips
-// No video here either.
 export const uploadDocument = multer({
   storage: memoryStorage,
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
