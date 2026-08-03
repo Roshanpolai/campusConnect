@@ -44,7 +44,7 @@ export default function Login() {
       illustrationTitle="Welcome back!"
       illustrationText="Log in to continue to your account"
     >
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3">
         <div>
           <label className="label-field">Silicon Email</label>
           <div className="relative">
@@ -133,77 +133,64 @@ export default function Login() {
 
 export function AuthShell({ children, illustrationTitle, illustrationText }) {
   return (
-    <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
-      {/* <div className="relative hidden overflow-hidden bg-sidebar-gradient p-10 lg:flex lg:flex-col lg:justify-between">
-        <div className="flex items-center gap-2.5">
-          <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary-gradient text-white shadow-glow">
-            <GraduationCap size={20} />
-          </div>
-          <div>
-            <p className="text-sm font-bold text-white leading-tight">CampusConnect</p>
-            <p className="text-[11px] text-ink-400 leading-tight">All-in-one campus platform</p>
-          </div>
-        </div>
-
-        <div className="relative z-10">
-          <h2 className="text-3xl font-bold text-white">{illustrationTitle}</h2>
-          <p className="mt-2 max-w-sm text-ink-400">{illustrationText}</p>
-        </div>
-
-        <div className="absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-primary-500/20 blur-3xl" />
-        <div className="absolute -top-16 -left-10 h-56 w-56 rounded-full bg-primary-400/10 blur-3xl" />
-      </div> */}
-
-      <div className="relative hidden overflow-hidden bg-sidebar-gradient p-10 lg:flex lg:flex-col">
-        <div className="relative z-10 flex items-center gap-2.5">
-          <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary-gradient text-white shadow-glow">
-            <GraduationCap size={20} />
-          </div>
-
-          <div>
-            <p className="text-sm font-bold leading-tight text-white">
-              CampusConnect
-            </p>
-            <p className="text-[11px] leading-tight text-ink-400">
-              All-in-one campus platform
-            </p>
-          </div>
-        </div>
-
-        {/* IMAGE - Middle */}
-        <div className="relative z-10 flex flex-1 items-center justify-center">
-          <img
-            src={campusLogin}
-            alt="Campus Connect"
-            className="w-full max-w-md object-contain"
-          />
-        </div>
-
-        {/* Welcome Text - Bottom */}
-        <div className="relative z-10">
-          <h2 className="text-3xl font-bold text-white">{illustrationTitle}</h2>
-
-          <p className="mt-2 max-w-sm text-ink-400">{illustrationText}</p>
-        </div>
-
-        {/* Background Effects */}
-        <div className="absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-primary-500/20 blur-3xl" />
-        <div className="absolute -top-16 -left-10 h-56 w-56 rounded-full bg-primary-400/10 blur-3xl" />
-      </div>
-
-      <div className="flex items-center justify-center bg-surface px-6 py-10 sm:px-10">
-        <div className="w-full max-w-sm">
-          <div className="mb-8 flex items-center gap-2.5 lg:hidden">
-            <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary-gradient text-white shadow-glow">
+    <div className="flex h-screen items-center justify-center overflow-hidden bg-[#f7f7fa] p-4">
+      {/* MAIN CARD */}
+      <div className="grid h-[90vh] max-h-[720px] w-full max-w-5xl overflow-hidden rounded-[28px] bg-white shadow-2xl lg:grid-cols-2">
+        
+        {/* LEFT */}
+        <div className="relative hidden bg-gradient-to-br from-[#7357f6] to-[#a777ed] px-10 py-7 lg:flex lg:flex-col">
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <div className="grid h-9 w-9 place-items-center rounded-xl bg-white/15 text-white">
               <GraduationCap size={20} />
             </div>
-            <p className="text-sm font-bold text-ink-900">CampusConnect</p>
+
+            <div>
+              <p className="text-sm font-bold leading-tight text-white">
+                CampusConnect
+              </p>
+              <p className="text-[11px] text-white/70">
+                All-in-one campus platform
+              </p>
+            </div>
           </div>
-          <h1 className="text-2xl font-bold text-ink-900">
-            {illustrationTitle}
-          </h1>
-          <p className="mb-6 mt-1 text-sm text-ink-500">{illustrationText}</p>
-          {children}
+
+          {/* Image */}
+          <div className="flex min-h-0 flex-1 items-center justify-center py-4">
+            <img
+              src={campusLogin}
+              alt="Campus Connect"
+              className="max-h-[480px] w-full max-w-[400px] rounded-[24px] object-cover"
+            />
+          </div>
+
+          {/* Bottom Text */}
+          {/* <div>
+            <h2 className="text-xl font-bold text-white">
+              Your campus, all in one place.
+            </h2>
+          </div> */}
+        </div>
+
+        {/* RIGHT */}
+        <div className="flex items-center justify-center bg-white px-10 py-8">
+          <div className="w-full max-w-sm">
+            <div className="mb-8 flex items-center gap-2.5 lg:hidden">
+              <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary-gradient text-white">
+                <GraduationCap size={20} />
+              </div>
+
+              <p className="text-sm font-bold text-ink-900">CampusConnect</p>
+            </div>
+
+            <h1 className="text-2xl font-bold text-ink-900">
+              {illustrationTitle}
+            </h1>
+
+            <p className="mb-6 mt-1 text-sm text-ink-500">{illustrationText}</p>
+
+            {children}
+          </div>
         </div>
       </div>
     </div>

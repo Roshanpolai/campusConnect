@@ -1,8 +1,8 @@
 import User from "../models/User.js";
 import asyncHandler from "../middleware/asyncHandler.js";
 
-// @desc  Update own profile
-// @route PUT /api/users/me
+// desc -> Update own profile
+// route -> PUT /api/users/me
 export const updateProfile = asyncHandler(async (req, res) => {
   const allowedFields = [
     "fullName",
@@ -25,8 +25,8 @@ export const updateProfile = asyncHandler(async (req, res) => {
   res.json({ success: true, user: updated.toSafeObject() });
 });
 
-// @desc  Change password
-// @route PUT /api/users/me/password
+// desc ->  Change password
+// route -> PUT /api/users/me/password
 export const changePassword = asyncHandler(async (req, res) => {
   const { currentPassword, newPassword } = req.body;
   const user = await User.findById(req.user._id).select("+password");
@@ -40,17 +40,16 @@ export const changePassword = asyncHandler(async (req, res) => {
   res.json({ success: true, message: "Password updated successfully" });
 });
 
-// @desc  Delete own account
-// @route DELETE /api/users/me
+// desc -> Delete own account
+// route -> DELETE /api/users/me
 export const deleteOwnAccount = asyncHandler(async (req, res) => {
   await User.findByIdAndDelete(req.user._id);
   res.json({ success: true, message: "Account deleted" });
 });
 
 // ---------- Admin ----------
-
-// @desc  List / search users
-// @route GET /api/users
+// desc -> List / search users
+// route -> GET /api/users
 export const getUsers = asyncHandler(async (req, res) => {
   const { search = "", role } = req.query;
   const query = {};
@@ -66,8 +65,8 @@ export const getUsers = asyncHandler(async (req, res) => {
   res.json({ success: true, count: users.length, users });
 });
 
-// @desc  Update a user's role
-// @route PUT /api/users/:id/role
+// desc -> Update a user's role
+// route -> PUT /api/users/:id/role
 export const updateUserRole = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (!user) {
@@ -79,8 +78,8 @@ export const updateUserRole = asyncHandler(async (req, res) => {
   res.json({ success: true, user: user.toSafeObject() });
 });
 
-// @desc  Block / unblock a user
-// @route PUT /api/users/:id/status
+// desc -> Block / unblock a user
+// route -> PUT /api/users/:id/status
 export const updateUserStatus = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (!user) {
@@ -92,8 +91,8 @@ export const updateUserStatus = asyncHandler(async (req, res) => {
   res.json({ success: true, user: user.toSafeObject() });
 });
 
-// @desc  Delete a user (admin)
-// @route DELETE /api/users/:id
+// desc -> Delete a user (admin)
+// route -> DELETE /api/users/:id
 export const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findByIdAndDelete(req.params.id);
   if (!user) {

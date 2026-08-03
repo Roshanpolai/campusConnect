@@ -1,5 +1,4 @@
 import "dotenv/config";
-// dotenv.config();
 
 import express from "express";
 import cors from "cors";
@@ -21,13 +20,13 @@ import uploadRoutes from "./routes/uploadRoutes.js";
 import resourceRoutes from "./routes/resourceRoutes.js";
 
 await connectDB();
-
 const app = express();
 
 app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173", credentials: true }));
 app.use(express.json());
 if (process.env.NODE_ENV !== "production") app.use(morgan("dev"));
 
+3
 app.get("/api/health", (req, res) => res.json({ success: true, message: "CampusConnect API is running" }));
 
 app.use("/api/auth", authRoutes);

@@ -51,7 +51,7 @@ export default function ForgotPassword() {
           )}
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <label className="label-field">Silicon Email</label>
             <input type="email" required placeholder="you@silicon.ac.in" className="input-field" value={email} onChange={(e) => setEmail(e.target.value)} />

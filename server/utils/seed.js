@@ -11,8 +11,12 @@ const run = async () => {
   const password = process.env.ADMIN_PASSWORD;
 
   if (!email || !password) {
-    console.error("Set ADMIN_EMAIL and ADMIN_PASSWORD env vars before running the seed script.");
-    console.error('Example: ADMIN_EMAIL=ece.23becf33@silicon.ac.in ADMIN_PASSWORD=YourPass123 npm run seed');
+    console.error(
+      "Set ADMIN_EMAIL and ADMIN_PASSWORD env vars before running the seed script.",
+    );
+    console.error(
+      "Example: ADMIN_EMAIL=ece.23becf33@silicon.ac.in ADMIN_PASSWORD=YourPass123 npm run seed",
+    );
     process.exit(1);
   }
 
@@ -21,15 +25,22 @@ const run = async () => {
   if (user) {
     user.role = "super_admin";
     user.status = "active";
+
+    user.department = process.env.ADMIN_DEPARTMENT;
+    user.year = process.env.ADMIN_YEAR;
+    user.section = process.env.ADMIN_SECTION;
+
     await user.save();
+
     console.log(`Existing user ${email} promoted to super_admin.`);
   } else {
     user = await User.create({
       fullName: process.env.ADMIN_NAME || "Super Admin",
       email,
       studentId: process.env.ADMIN_STUDENT_ID || "admin0001",
-      department: process.env.ADMIN_DEPARTMENT || "Administration",
-      year: "N/A",
+      department: process.env.ADMIN_DEPARTMENT,
+      year: process.env.ADMIN_YEAR,
+      section: process.env.ADMIN_SECTION,
       password,
       role: "super_admin",
     });

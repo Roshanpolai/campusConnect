@@ -96,7 +96,7 @@ export default function Events() {
                     <p className="flex items-center gap-1.5"><MapPin size={13} /> {ev.venue}</p>
                     <p className="flex items-center gap-1.5"><Calendar size={13} /> {new Date(ev.date).toLocaleDateString()}</p>
                     <p className="flex items-center gap-1.5"><Clock size={13} /> {ev.time}</p>
-                    <p className="flex items-center gap-1.5"><Users size={13} /> {ev.participantsCount ?? ev.registeredStudents?.length ?? 0} going</p>
+                    <p className="flex items-center gap-1.5"><Users size={13} /> {ev.participantsCount ?? ev.registeredStudents?.length ?? 0} registered</p>
                   </div>
                   <button
                     onClick={() => toggleRegister(ev._id)}

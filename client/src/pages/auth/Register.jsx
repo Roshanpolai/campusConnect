@@ -22,10 +22,7 @@ export default function Register() {
   const [agree, setAgree] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
-  // Email is derived, not typed: branchcode.sicid@silicon.ac.in
   const branchCode = DEPARTMENTS.find((d) => d.label === form.department)?.code || "";
   const sicId = form.studentId.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
   const computedEmail = branchCode && sicId ? `${branchCode}.${sicId}@silicon.ac.in` : "";
@@ -57,8 +54,8 @@ export default function Register() {
   };
 
   return (
-    <AuthShell illustrationTitle="Create your account" illustrationText="Join the Silicon community today">
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <AuthShell illustrationTitle="Create your account" illustrationText="Join the Silicon community today" compact>
+      <form onSubmit={handleSubmit} className="space-y-3">
         <div>
           <label className="label-field">Full Name</label>
           <input name="fullName" required placeholder="Enter your full name" className="input-field" value={form.fullName} onChange={handleChange} />
@@ -97,7 +94,7 @@ export default function Register() {
           </div>
           <div>
             <label className="label-field">Student ID (SIC ID)</label>
-            <input name="studentId" required placeholder="e.g. 23BECF33" className="input-field" value={form.studentId} onChange={handleChange} />
+            <input name="studentId" required placeholder="e.g. 23becf90" className="input-field" value={form.studentId} onChange={handleChange} />
           </div>
         </div>
 

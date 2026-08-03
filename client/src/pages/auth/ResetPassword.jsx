@@ -39,7 +39,7 @@ export default function ResetPassword() {
           <p className="text-sm text-emerald-700">Password reset! Redirecting you to login...</p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <label className="label-field">New Password</label>
             <input type="password" required minLength={8} placeholder="Create new password" className="input-field" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />

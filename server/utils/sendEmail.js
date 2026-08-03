@@ -2,9 +2,6 @@ import nodemailer from "nodemailer";
 
 let cachedTransporter = null;
 
-// Returns a nodemailer transporter, or null if SMTP env vars aren't set —
-// callers should fall back to logging/dev behavior in that case rather than
-// throwing, so the app keeps working out of the box without email configured.
 function getTransporter() {
   if (cachedTransporter) return cachedTransporter;
 
@@ -20,9 +17,6 @@ function getTransporter() {
   return cachedTransporter;
 }
 
-// Sends an email. Returns { sent: true } on success, or { sent: false, reason }
-// if SMTP isn't configured or the send failed — never throws, so a broken/missing
-// mail config can't crash a request like forgot-password.
 export async function sendEmail({ to, subject, html, text }) {
   const transporter = getTransporter();
   if (!transporter) {

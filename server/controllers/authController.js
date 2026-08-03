@@ -4,8 +4,8 @@ import generateToken from "../utils/generateToken.js";
 import asyncHandler from "../middleware/asyncHandler.js";
 import { sendEmail, buildResetPasswordEmail } from "../utils/sendEmail.js";
 
-// @desc  Register a new student
-// @route POST /api/auth/register
+// desc -> Register new student
+// route -> POST /api/auth/register
 export const registerUser = asyncHandler(async (req, res) => {
   const { fullName, email, studentId, department, year, section, password, confirmPassword } = req.body;
 
@@ -13,6 +13,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Please fill in all required fields");
   }
+  
   if (password !== confirmPassword) {
     res.status(400);
     throw new Error("Passwords do not match");
