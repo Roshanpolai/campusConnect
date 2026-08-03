@@ -90,56 +90,44 @@ The application uses ES Modules throughout the backend.
 
 CampusConnect follows a client-server architecture.
 
-```text
-┌─────────────────────────────────────────────────────────────────┐
-│                         CLIENT LAYER                            │
-│                                                                 │
-│  React + Vite + Tailwind CSS + React Router                    │
-│                                                                 │
-│  Authentication │ Dashboard │ Academic │ Events │ Jobs         │
-│  Marketplace    │ Lost & Found │ Teams │ Profile │ Admin       │
-└───────────────────────────────┬─────────────────────────────────┘
-                                │
-                                │ HTTPS / REST API
-                                │ Axios
-                                ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                       APPLICATION LAYER                         │
-│                                                                 │
-│                      Node.js + Express                          │
-│                                                                 │
-│   Routes                                                        │
-│      ↓                                                          │
-│   Authentication / Authorization / Validation Middleware        │
-│      ↓                                                          │
-│   Controllers                                                   │
-│      ↓                         ↓                                 │
-│   Mongoose Models          Upload / Email Services              │
-└───────────────┬───────────────────────┬─────────────────────────┘
-                │                       │
-                │                       │
-                ▼                       ▼
-┌──────────────────────────┐   ┌───────────────────────────────┐
-│       MongoDB            │   │         Cloudinary            │
-│                          │   │                               │
-│ Users                    │   │ Profile images                │
-│ Schedules                │   │ Event images                  │
-│ Events                   │   │ Marketplace images            │
-│ Jobs                     │   │ Lost & found images           │
-│ Products                 │   │ Timetable PDFs                │
-│ Resources                │   │ Notes / PYQs                  │
-│ Notifications            │   │ Resumes / documents           │
-│ Feedback / etc.          │   │                               │
-└──────────────────────────┘   └───────────────────────────────┘
-                │
-                │
-                ▼
-        ┌─────────────────┐
-        │   SMTP Server   │
-        │ Password reset  │
-        │ email delivery  │
-        └─────────────────┘
-```
+````
+┌──────────────────────────────────────────────────────────────────────────┐
+│                              CLIENT LAYER                                │
+│                     React 18 + Vite + Tailwind CSS                       │
+│                                                                          │
+│  [Auth]      [Dashboard]     [Academic]      [Events]     [Jobs]         │
+│  [Market]    [Lost&Found]    [Teams]         [Profile]    [Admin]        │
+└────────────────────────────────────┬─────────────────────────────────────┘
+                                     │
+                                     │ HTTPS / REST (Axios)
+                                     ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│                            APPLICATION LAYER                             │
+│                         Node.js + Express REST API                       │
+│                                                                          │
+│   ┌──────────────────────────────────────────────────────────────────┐   │
+│   │ Routing & Middleware Layer                                       │   │
+│   │  └─ JWT Auth  ·  RBAC Access  ·  Express Validator / Zod         │   │
+│   └────────────────────────────────┬─────────────────────────────────┘   │
+│                                    │                                     │
+│   ┌────────────────────────────────▼─────────────────────────────────┐   │
+│   │ Controller Business Logic                                        │   │
+│   └──────┬─────────────────────────┬─────────────────────────┬───────┘   │
+└──────────┼─────────────────────────┼─────────────────────────┼───────────┘
+           │                         │                         │
+           │ Mongoose ORM            │ SDK Uploads             │ Nodemailer
+           ▼                         ▼                         ▼
+┌──────────────────────┐  ┌──────────────────────┐  ┌──────────────────────┐
+│       MongoDB        │  ┌       Cloudinary     │  │     SMTP Server      │
+│      (Database)      │  │    (Media Assets)    │  │      (Emails)        │
+├──────────────────────┤  ├──────────────────────┤  ├──────────────────────┤
+│ • Users              │  │ • Profile & Events   │  │ • Password Resets    │
+│ • Schedules & Events │  │ • Marketplace & Items│  │ • Event Reminders    │
+│ • Jobs & Products    │  │ • Timetables & Notes │  │ • Verification Codes │
+│ • Resources & Teams  │  │ • Resumes / Documents│  │                      │
+│ • Notifications      │  │                      │  │                      │
+└──────────────────────┘  └──────────────────────┘  └──────────────────────┘
+````
 
 ### Architecture Principles
 
