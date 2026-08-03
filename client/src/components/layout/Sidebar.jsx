@@ -41,7 +41,7 @@ export default function Sidebar({ mobileOpen, onClose }) {
       >
         <div className="flex items-center gap-2.5 px-2 pb-6">
           <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary-gradient text-white shadow-glow">
-            <img src="public/logo.png" alt="CampusConnect" className="h-full w-full object-contain" />
+            <img src="logo.png" alt="CampusConnect" className="h-full w-full object-contain" />
           </div>
           <div>
             <p className="text-sm font-bold text-white leading-tight">CampusConnect</p>
