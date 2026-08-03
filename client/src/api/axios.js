@@ -1,11 +1,16 @@
 import axios from "axios";
 
-// Centralized API client: attaches the JWT and normalizes the base URL.
-const api = axios.create({ baseURL: "/api" });
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || "/api",
+});
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("cc_token");
-  if (token) config.headers.Authorization = `Bearer ${token}`;
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
   return config;
 });
 
@@ -16,6 +21,7 @@ api.interceptors.response.use(
       localStorage.removeItem("cc_token");
       localStorage.removeItem("cc_user");
     }
+
     return Promise.reject(error);
   }
 );
